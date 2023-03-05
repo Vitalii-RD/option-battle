@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -15,8 +16,8 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "AUTHORS")
-public class Author {
+@Table(name = "USERS")
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
@@ -26,10 +27,10 @@ public class Author {
     @Column(name = "registered_on")
     private Timestamp registeredOn;
     @JsonIgnore
-    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Tournament> tournaments;
 
-    public Author (long id) {
+    public User(long id) {
         this.id = id;
     }
 }

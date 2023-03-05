@@ -21,8 +21,8 @@ public class Tournament {
     private String name;
 
     @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name = "author_id", nullable = false)
-    private Author author;
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @Column(name = "created_on")
     private Timestamp createdOn;
@@ -36,8 +36,8 @@ public class Tournament {
             inverseJoinColumns = @JoinColumn(name = "battle_option_id"))
     private List<BattleOption> battleOptions;
 
-    public Tournament(Author author, String name, Date createdOn, Date updatedOn, List<BattleOption> battleOptions) {
-        this.author = author;
+    public Tournament(User user, String name, Date createdOn, Date updatedOn, List<BattleOption> battleOptions) {
+        this.user = user;
         this.name = name;
         this.createdOn = Timestamp.from(createdOn.toInstant());
         this.createdOn = Timestamp.from(updatedOn.toInstant());

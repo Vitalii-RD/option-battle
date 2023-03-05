@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 public class TournamentDTO {
-    private long author_id;
+    private long user_id;
     private String name;
     private List<BattleOption> battleOptions;
 }

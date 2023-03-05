@@ -1,7 +1,7 @@
 package com.optionbattleapp.Tournament;
 
 import com.optionbattleapp.DTOs.TournamentDTO;
-import com.optionbattleapp.Entities.Author;
+import com.optionbattleapp.Entities.User;
 import com.optionbattleapp.Entities.Tournament;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,17 +19,17 @@ public class TournamentService {
     private final ModelMapper modelMapper;
     private TournamentRepository tournamentRepository;
     private BattleOptionRepository battleOptionRepository;
-    private AuthorRepository authorRepository;
+    private UserRepository userRepository;
 
     @Autowired
     public TournamentService(ModelMapper modelMapper,
                              TournamentRepository tournamentRepository,
                              BattleOptionRepository battleOptionRepository,
-                             AuthorRepository authorRepository) {
+                             UserRepository userRepository) {
         this.modelMapper = modelMapper;
         this.tournamentRepository = tournamentRepository;
         this.battleOptionRepository = battleOptionRepository;
-        this.authorRepository = authorRepository;
+        this.userRepository = userRepository;
     }
 
     public List<Tournament> getAll() {
@@ -41,7 +41,7 @@ public class TournamentService {
         Timestamp currentTime = Timestamp.from(new Date().toInstant());
         newTournament.setCreatedOn(currentTime);
         newTournament.setUpdatedOn(currentTime);
-        newTournament.setAuthor(getAuthorById(tournamentDTO.getAuthor_id()));
+        newTournament.setUser(getUserById(tournamentDTO.getUser_id()));
         return tournamentRepository.save(newTournament);
     }
 
@@ -51,7 +51,7 @@ public class TournamentService {
 
         updatedTournament.setId(tournamentId);
         updatedTournament.setUpdatedOn(Timestamp.from(new Date().toInstant()));
-        updatedTournament.setAuthor(getAuthorById(updatedTournamentDTO.getAuthor_id()));
+        updatedTournament.setUser(getUserById(updatedTournamentDTO.getUser_id()));
         updatedTournament.setCreatedOn(existingTournament.getCreatedOn());
 
         return tournamentRepository.save(updatedTournament);
@@ -62,9 +62,9 @@ public class TournamentService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Tournament not found"));
     }
 
-    public Author getAuthorById(Long authorId) {
-        return authorRepository.findById(authorId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Author not found"));
+    public User getUserById(Long userId) {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
     }
 
     public void deleteTournament(Long tournamentId) {
