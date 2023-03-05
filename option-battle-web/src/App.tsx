@@ -1,9 +1,17 @@
 import React, { FC } from 'react'
+
 import './App.css'
+import AppRouter from './general/AppRouter'
+import { CssBaseline } from '@mui/material'
 
 const App: FC = () => {
   return (
-    <div className="App">Hello World</div>
+    <>
+      <CssBaseline />
+      <div className="App">
+        <AppRouter/>
+      </div>
+    </>
   )
 }
 
