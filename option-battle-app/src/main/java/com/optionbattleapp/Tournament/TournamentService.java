@@ -3,6 +3,7 @@ package com.optionbattleapp.Tournament;
 import com.optionbattleapp.DTOs.TournamentDTO;
 import com.optionbattleapp.Entities.User;
 import com.optionbattleapp.Entities.Tournament;
+import com.optionbattleapp.User.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,9 +18,9 @@ import java.util.List;
 public class TournamentService {
 
     private final ModelMapper modelMapper;
-    private TournamentRepository tournamentRepository;
-    private BattleOptionRepository battleOptionRepository;
-    private UserRepository userRepository;
+    private final TournamentRepository tournamentRepository;
+    private final BattleOptionRepository battleOptionRepository;
+    private final UserRepository userRepository;
 
     @Autowired
     public TournamentService(ModelMapper modelMapper,

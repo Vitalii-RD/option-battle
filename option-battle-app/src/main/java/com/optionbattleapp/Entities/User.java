@@ -2,6 +2,7 @@ package com.optionbattleapp.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.optionbattleapp.DTOs.UserDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -32,5 +33,10 @@ public class User implements Serializable {
 
     public User(long id) {
         this.id = id;
+    }
+
+    public User(UserDTO userDTO) {
+        this.username = userDTO.getName();
+        this.password = userDTO.getPassword();
     }
 }
